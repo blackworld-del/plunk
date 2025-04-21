@@ -1,0 +1,42 @@
+version: '3'
+services:
+  plunk:
+    image: "driaug/plunk"
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      REDIS_URL: '${REDIS_URL:-redis://redis:6379}'
+      DATABASE_URL: '${DATABASE_URL:-postgresql://postgres:postgres@db:5432/postgres}'
+      JWT_SECRET: '${JWT_SECRET}'
+      AWS_REGION: '${AWS_REGION}'
+      AWS_ACCESS_KEY_ID: '${AWS_ACCESS_KEY_ID}'
+      AWS_SECRET_ACCESS_KEY: '${AWS_SECRET_ACCESS_KEY}'
+      AWS_SES_CONFIGURATION_SET: '${AWS_SES_CONFIGURATION_SET}'
+      NEXT_PUBLIC_API_URI: '${API_URI}'
+      API_URI: '${API_URI}'
+      APP_URI: '${APP_URI}'
+      DISABLE_SIGNUPS: 'False'
+    entrypoint: [ "/app/entry.sh" ]
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
+      interval: 10s
+      retries: 5
+      timeout: 10s
+  redis:
+    image: redis
+
+volumes:
+  postgres_data:
