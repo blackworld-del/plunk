@@ -4,15 +4,15 @@
     "description": "SendPortal. Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.",
     "license": "MIT",
     "require": {
-        "php": "^7.3",
+        "php": "^8.1",
         "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
+        "fruitcake/laravel-cors": "^2.0|^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.75",
+        "laravel/framework": "^10.48.29",
         "laravel/horizon": "^5.0",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.3",
-        "laravel/ui": "^3.0",
+        "livewire/livewire": "^2.12|^3.0",
+        "laravel/ui": "^4.0",
         "mettle/sendportal-core": "^2.0"
     },
     "require-dev": {
@@ -20,8 +20,8 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.2",
         "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "nunomaduro/collision": "^6.0|^7.0",
+        "phpunit/phpunit": "^9.3.3|^10.0"
     },
     "config": {
         "optimize-autoloader": true,
